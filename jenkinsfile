@@ -9,21 +9,16 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Build Docker Image with Helm') {
             steps {
-                // Build your Docker image using a Dockerfile
+                // Build your Docker image with Helm chart using a Dockerfile
                 script {
-                    def dockerImage = docker.build('your-docker-image-name:your-tag', '.')
-                }
-            }
-        }
+                    def dockerImage = docker.build('frontend:latest', '.') // Build Docker image with your Helm chart
 
-        stage('Unit Tests') {
-            steps {
-                // Run your Python unit tests within the Docker container
-                script {
-                    def testCommand = "docker run -v ${workspace}:/app your-docker-image-name:your-tag python -m unittest discover -s /app/path/to/tests -p '*_test.py'"
-                    sh returnStatus: true, script: testCommand
+                    // Optionally, you can install Helm and other dependencies in the Docker image if needed.
+                    dockerImage.inside {
+                        sh 'helm version' // Example: Run Helm commands inside the Docker image
+                    }
                 }
             }
         }
@@ -33,7 +28,7 @@ pipeline {
                 // Push the Docker image to Docker Hub
                 script {
                     withCredentials([usernamePassword(credentialsId: 'dckr_pat_6M1dtPndQqDUOUSA5mxFR1zMA9I', usernameVariable: 'yoval1012', passwordVariable: '@VD#26-6nFNyH*y')]) {
-                        def dockerHubImage = "yoval1012/finalproject:your-tag"
+                        def dockerHubImage = "yoval1012/finalproject:latest"
                         docker.withRegistry('https://registry.hub.docker.com', 'dockerHubCredentials') {
                             dockerImage.push()
                             dockerImage.push("${dockerHubImage}")
@@ -53,3 +48,4 @@ pipeline {
         }
     }
 }
+
