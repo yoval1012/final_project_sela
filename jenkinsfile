@@ -1,0 +1,55 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout your source code from your version control system (e.g., Git)
+                checkout scm
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                // Build your Docker image using a Dockerfile
+                script {
+                    def dockerImage = docker.build('your-docker-image-name:your-tag', '.')
+                }
+            }
+        }
+
+        stage('Unit Tests') {
+            steps {
+                // Run your Python unit tests within the Docker container
+                script {
+                    def testCommand = "docker run -v ${workspace}:/app your-docker-image-name:your-tag python -m unittest discover -s /app/path/to/tests -p '*_test.py'"
+                    sh returnStatus: true, script: testCommand
+                }
+            }
+        }
+
+        stage('Push to Docker Hub') {
+            steps {
+                // Push the Docker image to Docker Hub
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'dckr_pat_6M1dtPndQqDUOUSA5mxFR1zMA9I', usernameVariable: 'yoval1012', passwordVariable: '@VD#26-6nFNyH*y')]) {
+                        def dockerHubImage = "yoval1012/finalproject:your-tag"
+                        docker.withRegistry('https://registry.hub.docker.com', 'dockerHubCredentials') {
+                            dockerImage.push()
+                            dockerImage.push("${dockerHubImage}")
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        failure {
+            // Perform actions on failure, e.g., send notifications
+        }
+        success {
+            // Perform actions on success, e.g., send notifications
+        }
+    }
+}
