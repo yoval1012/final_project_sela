@@ -1,1 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cat App</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f8ff; /* Light blue background color */
+        }
+        h1, h2, h3 {
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 80%; /* Adjust the width as needed */
+            background-color: white; /* White background for the container */
+            border-radius: 10px; /* Rounded corners for the container */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Box shadow for a slight elevation effect */
+            padding: 20px;
+        }
+        .animals {
+            width: 100%;
+            text-align: center; /* Center-align the content within the .animals div */
+        }
+        .add-animal {
+            width: 100%;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            text-align: left;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        img {
+            max-width: 300px; /* Set the maximum width for the image */
+            height: auto; /* Maintain the aspect ratio */
+        }
+        a {
+            text-decoration: none;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Cat App</h1>
+    <div class="container">
+        <div class="animals">
+            <img src="{{ url_for('static', filename='cat.jpg') }}" alt="Cat">
+            <h2>List of Animals:</h2>
+            <ul>
+                {% if animals %}
+                    {% for animal in animals %}
+                        <li>
+                            <div>
+                                <span><a href="{{ animal['url'] }}" target="_blank">{{ animal['name'] }}</a></span>
+                                <p>{{ animal['description'] }}</p>
+                            </div>
+                            <button class="removeButton" data-animal="{{ animal['name'] }}">Remove</button>
+                        </li>
+                    {% endfor %}
+                {% else %}
+                    <li>No animals in the list.</li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="add-animal">
+            <h3>Add an Animal:</h3>
+            <form id="addAnimalForm">
+                <input type="text" id="newAnimal" name="new_animal" placeholder="Enter an animal name">
+                <input type="text" id="newDescription" name="new_description" placeholder="Enter a description">
+                <input type="text" id="newUrl" name="new_url" placeholder="Enter a wiki URL">
+                <button type="submit">Add</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Function to handle the removal of an animal
+            function removeAnimal(animal) {
+                $.ajax({
+                    type: "POST",
+                    url: "/remove_animal",
+                    data: { animal: animal },
+                    success: function(data) {
+                        var animalsList = data.animals;
+                        var animalListHtml = "";
+                        if (animalsList.length > 0) {
+                            for (var i = 0; i < animalsList.length; i++) {
+                                animalListHtml += '<li><div><span><a href="' + animalsList[i]['url'] + '" target="_blank">' + animalsList[i]['name'] + '</a></span>' +
+                                    '<p>' + animalsList[i]['description'] + '</p></div>' +
+                                    '<button class="removeButton" data-animal="' + animalsList[i]['name'] + '">Remove</button></li>';
+                            }
+                        } else {
+                            animalListHtml = "<li>No animals in the list.</li>";
+                        }
+                        $("ul").html(animalListHtml);
+                    }
+                });
+            }
 
+            // Add click event handlers to the remove buttons
+            $("ul").on("click", ".removeButton", function() {
+                var animalToRemove = $(this).data("animal");
+                removeAnimal(animalToRemove);
+            });
+
+            $("#addAnimalForm").submit(function(event) {
+                event.preventDefault();
+                var newAnimal = $("#newAnimal").val();
+                var newDescription = $("#newDescription").val();
+                var newUrl = $("#newUrl").val();
+                $.ajax({
+                    type: "POST",
+                    url: "/add_animal",
+                    data: { new_animal: newAnimal, new_description: newDescription, new_url: newUrl },
+                    success: function(data) {
+                        var animalsList = data.animals;
+                        var animalListHtml = "";
+                        if (animalsList.length > 0) {
+                            for (var i = 0; i < animalsList.length; i++) {
+                                animalListHtml += '<li><div><span><a href="' + animalsList[i]['url'] + '" target="_blank">' + animalsList[i]['name'] + '</a></span>' +
+                                    '<p>' + animalsList[i]['description'] + '</p></div>' +
+                                    '<button class="removeButton" data-animal="' + animalsList[i]['name'] + '">Remove</button></li>';
+                            }
+                        } else {
+                            animalListHtml = "<li>No animals in the list.</li>";
+                        }
+                        $("ul").html(animalListHtml);
+                        $("#newAnimal").val("");
+                        $("#newDescription").val("");
+                        $("#newUrl").val("");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
