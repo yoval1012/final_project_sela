@@ -21,7 +21,7 @@ pipeline {
             #}
         #}
         
-         stage('Build Docker Image') {
+        stage('Build Docker Image') {
             steps {
                 script {
                     def imageTag = "yoval1012/finalproject:app:${env.BUILD_NUMBER}"
