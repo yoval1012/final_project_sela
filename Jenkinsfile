@@ -43,15 +43,6 @@ pipeline {
             }
         }
     }
-
-    post {
-        failure {
-            // Perform actions on failure, e.g., send notifications
-        }
-        success {
-            // Perform actions on success, e.g., send notifications
-        }
-    }
 }
 
 
