@@ -1,10 +1,7 @@
 pipeline {
     agent {
-        docker {
-            image 'docker:20.10' // Specify the Docker image version you need
-            args '-v /var/run/docker.sock:/var/run/docker.sock' // Mount the Docker socket into the container
-            }
-        }
+        docker { image 'node:18.17.1-alpine3.18' }
+    }
 
     stages {
         stage('Checkout') {
