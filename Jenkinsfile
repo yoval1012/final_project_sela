@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Checkout your source code from your version control system (e.g., Git)
+                // Checkout your source code and Helm charts from Git
                 checkout scm
             }
         }
@@ -13,11 +13,10 @@ pipeline {
             steps {
                 // Build your Docker image with Helm chart using a Dockerfile
                 script {
-                    def dockerImage = docker.build('frontend:latest', '.') // Build Docker image with your Helm chart
-
+                    def dockerImage = docker.build('frontend:latest', '.')
                     // Optionally, you can install Helm and other dependencies in the Docker image if needed.
                     dockerImage.inside {
-                        sh 'helm version' // Example: Run Helm commands inside the Docker image
+                        sh 'helm version'
                     }
                 }
             }
@@ -38,7 +37,6 @@ pipeline {
             }
         }
     }
-
-    
 }
+
 
