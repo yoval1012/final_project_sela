@@ -4,20 +4,21 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // Checkout your source code and Helm charts from Git
+                // Checkout your source code from your version control system (e.g., Git)
                 checkout scm
             }
         }
 
-        
-        
-        stage('Build Docker Image') {
+        stage('Build Docker Image with Helm') {
             steps {
+                // Build your Docker image with Helm chart using a Dockerfile
                 script {
-                    def imageTag = "yoval1012/finalproject:app:${env.BUILD_NUMBER}"
+                    def dockerImage = docker.build('frontend:latest', '.') // Build Docker image with your Helm chart
 
-                    // Build Docker image
-                    sh "docker build -t ${imageTag} ."
+                    // Optionally, you can install Helm and other dependencies in the Docker image if needed.
+                    dockerImage.inside {
+                        sh 'helm version' // Example: Run Helm commands inside the Docker image
+                    }
                 }
             }
         }
@@ -37,6 +38,16 @@ pipeline {
             }
         }
     }
+
+    post {
+        failure {
+            // Perform actions on failure, e.g., send notifications
+        }
+        success {
+            // Perform actions on success, e.g., send notifications
+        }
+    }
 }
+
 
 
