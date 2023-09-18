@@ -9,15 +9,25 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image with Helm') {
+        #stage('Build Docker Image with Helm') {
+         #   steps {
+          #      // Build your Docker image with Helm chart using a Dockerfile
+           #        def dockerImage = docker.build('frontend:latest', '.')
+            #        // Optionally, you can install Helm and other dependencies in the Docker image if needed.
+             #       dockerImage.inside {
+              #          sh 'helm version'
+               #     }
+                #}
+            #}
+        #}
+        
+         stage('Build Docker Image') {
             steps {
-                // Build your Docker image with Helm chart using a Dockerfile
                 script {
-                    def dockerImage = docker.build('frontend:latest', '.')
-                    // Optionally, you can install Helm and other dependencies in the Docker image if needed.
-                    dockerImage.inside {
-                        sh 'helm version'
-                    }
+                    def imageTag = "yoval1012/finalproject:app:${env.BUILD_NUMBER}"
+
+                    // Build Docker image
+                    sh "docker build -t ${imageTag} ."
                 }
             }
         }
