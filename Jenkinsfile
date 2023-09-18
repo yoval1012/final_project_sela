@@ -13,7 +13,7 @@ pipeline {
             steps {
                 // Build your Docker image with Helm chart using a Dockerfile
                 script {
-                    def dockerImage = docker.build('frontend:latest', '.') // Build Docker image with your Helm chart
+                    def dockerImage = docker.build('app:latest', '.') // Build Docker image with your Helm chart
 
                     // Optionally, you can install Helm and other dependencies in the Docker image if needed.
                     dockerImage.inside {
