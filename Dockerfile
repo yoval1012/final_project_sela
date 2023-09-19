@@ -1,5 +1,7 @@
-# Use an official Python runtime as a parent image
-FROM python:3.8
+FROM python:3.8-alpine
+
+# Create a non-root user
+RUN useradd -m yuval
 
 # Set the working directory in the container
 WORKDIR /app
@@ -12,6 +14,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the rest of the application code to the working directory
 COPY . .
+
+# Change ownership of the application directory to the non-root user
+RUN chown -R appuser:appuser /app
+
+# Switch to the non-root user
+USER yuval
 
 # Expose port 3001 for your Flask app
 EXPOSE 3001
