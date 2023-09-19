@@ -42,7 +42,7 @@ pipeline {
                 // Push the Docker image to Docker Hub
                 script {
                     def dockerImage = docker.image('app:latest')
-                    docker.withRegistry('https://registry.hub.docker.com', 'yuvals_dockerhub') {
+                    docker.withRegistry('https://hub.docker.com/repository/docker/yoval1012/finalproject', 'yuvals_dockerhub') {
                         dockerImage.push()
                         dockerImage.push("${DOCKERHUB_IMAGE}")
                     }
