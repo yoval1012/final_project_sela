@@ -15,6 +15,12 @@ pipeline {
                 checkout scm
             }
         }
+        
+        stage('Install Helm') {
+            steps {
+                sh 'curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash'
+            }
+        }
 
         stage('Build Docker Image with Helm') {
             steps {
