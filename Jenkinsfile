@@ -26,7 +26,7 @@ pipeline {
             steps {
             // Build your Docker image with Helm chart using a Dockerfile
                 script {
-                    def dockerImage = docker.build('app:latest', '-f Dockerfile .') // Build Docker image with your Helm chart
+                    def dockerImage = docker.build('yoval1012/finalproject', '-f Dockerfile .') // Build Docker image with your Helm chart
 
                      // Optionally, you can install Helm and other dependencies in the Docker image if needed.
                     dockerImage.inside {
@@ -41,7 +41,7 @@ pipeline {
             steps {
                 // Push the Docker image to Docker Hub
                 script {
-                    def dockerImage = docker.image('app:latest')
+                    def dockerImage = docker.image('yoval1012/finalproject')
                     docker.withRegistry('https://registry.hub.docker.com', 'yuval_dockerhub') {
                         dockerImage.push()
                         dockerImage.push("${DOCKERHUB_IMAGE}")
