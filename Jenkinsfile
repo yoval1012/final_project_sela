@@ -41,13 +41,11 @@ pipeline {
             steps {
                 // Push the Docker image to Docker Hub
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'dckr_pat_6M1dtPndQqDUOUSA5mxFR1zMA9I', usernameVariable: 'yoval1012', passwordVariable: '@VD#26-6nFNyH*y')]) {
-                        def dockerHubImage = "yoval1012/finalproject:app"
-                        docker.withRegistry('https://registry.hub.docker.com', 'dockerHubCredentials') {
-                            dockerImage.push()
-                            dockerImage.push("${dockerHubImage}")
-                        }
+                    docker.withRegistry('https://registry.hub.docker.com', 'dockerHubCredentials') {
+                        dockerImage.push()
+                        dockerImage.push("${dockerHubImage}")
                     }
+
                 }
             }
         }
