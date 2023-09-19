@@ -1,5 +1,11 @@
 pipeline {
-    agent any
+    agent {
+        kubernetes {
+            label 'slave'
+            yamlFile 'build-pod.yaml'
+            defaultContainer 'ez-docker-helm-build'
+        }
+
     
 
     stages {
