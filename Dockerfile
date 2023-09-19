@@ -1,5 +1,7 @@
 FROM python:3.8-alpine
 
+RUN curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
 # Set the working directory in the container
 WORKDIR /app
 
