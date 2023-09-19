@@ -1,7 +1,8 @@
 FROM python:3.8-alpine
 
-RUN apk --no-cache add curl bash
+RUN apk --no-cache add curl bash openssl
 
+# Install Helm
 RUN curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
 # Set the working directory in the container
