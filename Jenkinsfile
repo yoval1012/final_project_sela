@@ -44,7 +44,7 @@ pipeline {
                     def dockerImage = docker.image('yoval1012/finalproject')
                     docker.withRegistry('https://registry.hub.docker.com', 'yuval_dockerhub') {
                         dockerImage.push()
-                        dockerImage.push("${DOCKERHUB_IMAGE}")
+                        dockerImage.push("${'yoval1012/finalproject'}")
                     }
                 }
             }
