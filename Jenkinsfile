@@ -4,8 +4,8 @@ pipeline {
             label 'slave'
             yamlFile 'build-pod.yaml'
             defaultContainer 'ez-docker-helm-build'
-        }
-    }
+        }
+    }    
 
 
     stages {
@@ -46,7 +46,6 @@ pipeline {
             }
         }
     }
-
 }
 
 
