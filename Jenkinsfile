@@ -18,17 +18,18 @@ pipeline {
 
         stage('Build Docker Image with Helm') {
             steps {
-                // Build your Docker image with Helm chart using a Dockerfile
+            // Build your Docker image with Helm chart using a Dockerfile
                 script {
-                    def dockerImage = docker.build('app:latest', 'ez-docker-helm-build') // Build Docker image with your Helm chart
+                    def dockerImage = docker.build('app:latest', '-f Dockerfile .') // Build Docker image with your Helm chart
 
-                    // Optionally, you can install Helm and other dependencies in the Docker image if needed.
+                     // Optionally, you can install Helm and other dependencies in the Docker image if needed.
                     dockerImage.inside {
                         sh 'helm version' // Example: Run Helm commands inside the Docker image
                     }
                 }
             }
         }
+
 
         stage('Push to Docker Hub') {
             steps {
