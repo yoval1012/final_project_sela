@@ -12,10 +12,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the application code to the working directory
 COPY . .
 
-# Change ownership of the application directory to the non-root user
-RUN chown -R appuser:appuser /app
-
-
 # Expose port 3001 for your Flask app
 EXPOSE 3001
 
