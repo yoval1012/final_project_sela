@@ -41,11 +41,11 @@ pipeline {
             steps {
                 // Push the Docker image to Docker Hub
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'dockerHubCredentials') {
+                    def dockerImage = docker.image('app:latest')
+                    docker.withRegistry('https://registry.hub.docker.com', DOCKERHUB_CREDENTIALS) {
                         dockerImage.push()
-                        dockerImage.push("${dockerHubImage}")
+                        dockerImage.push("${DOCKERHUB_IMAGE}")
                     }
-
                 }
             }
         }
