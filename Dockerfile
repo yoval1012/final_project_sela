@@ -1,8 +1,5 @@
 FROM python:3.8-alpine
 
-# Create a non-root user
-RUN useradd -m yuval
-
 # Set the working directory in the container
 WORKDIR /app
 
@@ -18,8 +15,6 @@ COPY . .
 # Change ownership of the application directory to the non-root user
 RUN chown -R appuser:appuser /app
 
-# Switch to the non-root user
-USER yuval
 
 # Expose port 3001 for your Flask app
 EXPOSE 3001
