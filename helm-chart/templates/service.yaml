@@ -4,7 +4,7 @@ metadata:
   name: yuval-app-service
 spec:
   selector:
-    app: yuval-app-service
+    app: yuval-app
   type: LoadBalancer
   ports:
   - name: yuval-app-service
