@@ -1,5 +1,5 @@
 import pytest
-from your_app_module import app  # Replace 'your_app_module' with the actual module name where your Flask app is defined
+from app import app  # Replace 'your_app_module' with the actual module name where your Flask app is defined
 
 @pytest.fixture
 def client():
