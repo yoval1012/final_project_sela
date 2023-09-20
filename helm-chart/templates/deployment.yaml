@@ -3,14 +3,12 @@ kind: Deployment
 metadata:
   name: yuval
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
-      # You can specify other labels if needed, but 'app' is not required
       app: yuval  # Define a label for your app
   template:
     metadata:
-      # You can specify other labels here as well
       labels:
         app: yuval  # Label for your app, should match the selector
     spec:
