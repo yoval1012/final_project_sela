@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: yuval-app
+  name: yuval
 spec:
   replicas: 3
   selector:
     matchLabels:
       # You can specify other labels if needed, but 'app' is not required
-      app: yuval-app  # Define a label for your app
+      app: yuval  # Define a label for your app
   template:
     metadata:
       # You can specify other labels here as well
       labels:
-        app: yuval-app  # Label for your app, should match the selector
+        app: yuval  # Label for your app, should match the selector
     spec:
       containers:
-        - name: container
+        - name: yuval
           image: yoval1012/finalproject:latest
           ports:
             - containerPort: 3001
