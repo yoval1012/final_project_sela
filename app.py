@@ -30,7 +30,8 @@ def add_animal():
 
     # Retrieve the updated list of animals from MongoDB
     animals_from_db = list(db.animals.find())
-    return jsonify({'animals': animals_from_db})
+    #return jsonify({'animals': animals_from_db})
+    return render_template('index.html', animals=animals_from_db)
 
 @app.route('/remove_animal', methods=['POST'])
 def remove_animal():
@@ -40,7 +41,8 @@ def remove_animal():
 
     # Retrieve the updated list of animals from MongoDB
     animals_from_db = list(db.animals.find())
-    return jsonify({'animals': animals_from_db})
+    #return jsonify({'animals': animals_from_db})
+    return render_template('index.html', animals=animals_from_db)
 
 app.run(host='0.0.0.0',port=3001)
 
