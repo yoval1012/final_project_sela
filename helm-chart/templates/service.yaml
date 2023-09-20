@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: main
+  name: yuval-app
 spec:
   selector:
-    app: main
+    app: yuval-app
   type: LoadBalancer
   ports:
-  - name: main
+  - name: yuval-app
     port: 3001
     targetPort: 3001
