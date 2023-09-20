@@ -42,6 +42,5 @@ def remove_animal():
     animals_from_db = list(db.animals.find())
     return jsonify({'animals': animals_from_db})
 
-if __name__ == '__main__':
-    app.run(port=3001)
+app.run(port=3001)
 
