@@ -6,7 +6,7 @@ app = Flask(__name__)
 # Connect to your MongoDB server (change the connection URI as needed)
 client = MongoClient('mongodb://root:3yGWpZ7jeS@34.78.116.136:27017/')
 db = client['animals_db']  # Replace 'your_database_name' with your database name
-
+db.create_collection('animals', autoIndexId=True)
 # Sample initial list of animals as dictionaries
 animals = [{'name': 'Cat', 'description': 'A small domesticated carnivorous mammal.', 'url': 'https://en.wikipedia.org/wiki/Cat'},
            {'name': 'Dog', 'description': 'A domesticated mammal known for loyalty and companionship.', 'url': 'https://en.wikipedia.org/wiki/Dog'},
