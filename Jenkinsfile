@@ -38,9 +38,11 @@ pipeline {
 
         stage('Run Pytest') {
             steps {
-                dockerImage.inside {
-                    // Assuming your pytest command is something like this
-                    sh 'pytest test_syntax.py'  // Replace with the actual path to your pytest script
+                script {
+                    dockerImage.inside {
+                        // Assuming your pytest command is something like this
+                        sh 'pytest test_syntax.py'  // Replace with the actual path to your pytest script
+                    }
                 }
             }
         }
