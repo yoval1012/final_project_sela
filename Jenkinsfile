@@ -22,7 +22,7 @@ pipeline {
             //}
         //}
 
-        stage('Build Docker Image with Helm') {
+        stage('Build Docker Image') {
             steps {
             // Build your Docker image with Helm chart using a Dockerfile
                 script {
