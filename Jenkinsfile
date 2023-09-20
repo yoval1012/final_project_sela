@@ -39,10 +39,15 @@ pipeline {
         stage('Run Pytest') {
             steps {
                 script {
-                    def customDockerImage = docker.image('yoval1012/finalproject')
-                    customDockerImage.inside {
-                        // Assuming your pytest command is something like this
-                        sh 'pytest test_syntax.py'  // Replace with the actual path to your pytest script
+                    try {
+                        def customDockerImage = docker.image('yoval1012/finalproject')
+                        customDockerImage.inside {
+                            // Assuming your pytest command is something like this
+                            sh 'pytest test_syntax.py'  // Replace with the actual path to your pytest script
+                        }
+                    } catch (Exception e) {
+                        currentBuild.result = 'FAILURE'
+                        error("Failed to run pytest: ${e.message}")
                     }
                 }
             }
