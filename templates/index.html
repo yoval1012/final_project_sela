@@ -91,8 +91,6 @@
                 <button type="submit">Add</button>
             </form>
         </div>
-        <!-- Add a Refresh Page button -->
-        <button id="refreshButton">Refresh Page</button>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
@@ -126,8 +124,8 @@
                 removeAnimal(animalToRemove);
             });
 
-            // Add event handler for the Refresh Page button
-            $("#refreshButton").on("click", function() {
+            // Add click event handlers to all buttons to refresh the page
+            $("button").on("click", function() {
                 location.reload(); // Reload the page
             });
 
@@ -163,4 +161,3 @@
     </script>
 </body>
 </html>
-
