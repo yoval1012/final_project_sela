@@ -38,7 +38,7 @@ pipeline {
 
         stage('Run Pytest') {
             steps {
-                container(name: 'ez-docker-helm-build', shell: '/bin/sh') {
+                dockerImage.inside {
                     // Assuming your pytest command is something like this
                     sh 'pytest test_syntax.py'  // Replace with the actual path to your pytest script
                 }
