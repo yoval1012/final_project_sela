@@ -39,7 +39,8 @@ pipeline {
         stage('Run Pytest') {
             steps {
                 script {
-                    dockerImage.inside {
+                    def customDockerImage = docker.image('yoval1012/finalproject')
+                    customDockerImage.inside {
                         // Assuming your pytest command is something like this
                         sh 'pytest test_syntax.py'  // Replace with the actual path to your pytest script
                     }
