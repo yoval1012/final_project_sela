@@ -40,7 +40,7 @@ pipeline {
             steps {
                 container(name: 'ez-docker-helm-build', shell: '/bin/sh') {
                     // Assuming your pytest command is something like this
-                    sh 'pytest /path/to/test_syntax.py'  // Replace with the actual path to your pytest script
+                    sh 'pytest test_syntax.py'  // Replace with the actual path to your pytest script
                 }
             }
         }
