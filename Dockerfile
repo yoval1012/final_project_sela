@@ -1,4 +1,4 @@
-FROM python:3.8-alpine
+FROM ezezeasy/ez-docker-helm-build:1.41
 
 RUN apk --no-cache add curl bash openssl
 
