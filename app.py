@@ -42,5 +42,5 @@ def remove_animal():
     animals_from_db = list(db.animals.find())
     return jsonify({'animals': animals_from_db})
 
-app.run(port=3001)
+app.run(host='0.0.0.0',port=3001)
 
