@@ -4,7 +4,7 @@ from pymongo import MongoClient
 app = Flask(__name__)
 
 # Connect to your MongoDB server (change the connection URI as needed)
-client = MongoClient('mongodb://localhost:27017')
+client = MongoClient('mongodb://root:3yGWpZ7jeS@34.78.116.136:27017/')
 db = client['animals_db']  # Replace 'your_database_name' with your database name
 
 # Sample initial list of animals as dictionaries
