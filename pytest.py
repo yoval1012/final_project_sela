@@ -9,6 +9,12 @@ def client():
     with app.test_client() as client:
         yield client
 
+@pytest.fixture
+def test_db():
+    client = MongoClient('mongodb://root:3yGWpZ7jeS@34.78.116.136:27017/')
+    db = client['test_animals_db']
+    yield db
+    client.close()
 
 # Test adding a new animal
 def test_add_animal(client, test_db):
