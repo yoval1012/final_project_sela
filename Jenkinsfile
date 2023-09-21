@@ -24,18 +24,6 @@ pipeline {
                 }
             }
         }
-
-        stage('Push to Docker Hub') {
-            steps {
-                script {
-                    def dockerImage = docker.image('yoval1012/finalproject')
-                    docker.withRegistry('https://registry.hub.docker.com', 'yuval_dockerhub') {
-                        dockerImage.push()
-                    }
-                }
-            }
-        }
-
         stage('Run Pytest') {
             steps {
                 script {
@@ -52,5 +40,16 @@ pipeline {
                 }
             }
         }
+
+        stage('Push to Docker Hub') {
+            steps {
+                script {
+                    def dockerImage = docker.image('yoval1012/finalproject')
+                    docker.withRegistry('https://registry.hub.docker.com', 'yuval_dockerhub') {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }       
     }
 }
