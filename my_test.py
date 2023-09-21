@@ -1,5 +1,6 @@
 import pytest
 from app import app
+from pytest_timeout import timeout
 
 @pytest.fixture
 def client():
@@ -25,5 +26,11 @@ def test_remove_animal_route(client):
     assert rv.status_code == 200
     assert b'Remove an Animal' in rv.data
 
-# Add more tests for specific routes and functionality as needed
+@timeout(10)  # Set the timeout to 10 seconds
+def test_my_function():
+    # Your test code here
+    print("Starting the test")
+    # Your test code here
+    print("Test completed")
+
 
