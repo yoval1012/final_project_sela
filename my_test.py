@@ -10,7 +10,8 @@ def client():
 def test_index(client):
     # Test if the response for the main route is 200 (OK)
     rv = client.get('/')
-    assert rv.status_code == 200
+    assert rv.status_code == 200
+
 
 
 
