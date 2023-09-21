@@ -31,7 +31,7 @@ pipeline {
                         def customDockerImage = docker.image('yoval1012/finalproject')
                         customDockerImage.inside {
                             // Assuming your pytest command is something like this
-                            sh 'find . -name '__pycache__' -exec rm -r {} +'
+                            sh "find . -name '__pycache__' -exec rm -r {} +"
                             sh 'pytest -vv pytest.py' 
                         }
                     } catch (Exception e) {
