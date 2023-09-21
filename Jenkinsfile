@@ -33,6 +33,7 @@ pipeline {
                             // Assuming your pytest command is something like this
                             sh "find . -name '__pycache__' -exec rm -r {} +"
                             sh 'pytest -vv my_test.py' 
+                            echo 'passed test'
                         }
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
