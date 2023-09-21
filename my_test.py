@@ -1,5 +1,6 @@
 import pytest
 from app import app
+import pymongo
 
 
 # Initialize the Flask app for testing
