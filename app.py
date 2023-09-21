@@ -13,7 +13,7 @@ animals = [{'name': 'Cat', 'description': 'A small domesticated carnivorous mamm
            {'name': 'Dog', 'description': 'A domesticated mammal known for loyalty and companionship.', 'url': 'https://en.wikipedia.org/wiki/Dog'},
            {'name': 'Elephant', 'description': 'A large herbivorous mammal with a trunk.', 'url': 'https://en.wikipedia.org/wiki/Elephant'}]
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
 def index():
     # Retrieve the list of animals from MongoDB
     animals_from_db = list(db.animals.find())
