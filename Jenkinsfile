@@ -31,7 +31,7 @@ pipeline {
                         def customDockerImage = docker.image('yoval1012/finalproject')
                         customDockerImage.inside {
                             // Assuming your pytest command is something like this
-                            sh 'pytest test_syntax.py' 
+                            sh 'pytest pytest.py' 
                         }
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
