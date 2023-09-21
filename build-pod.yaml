@@ -9,4 +9,11 @@ spec:
     imagePullPolicy: Always
     securityContext:
       privileged: true
-    
+    resources:
+      requests:
+        memory: "512Mi"   # Request 512 megabytes of memory
+        cpu: "500m"       # Request 500 milliCPU (0.5 CPU core)
+      limits:
+        memory: "1Gi"     # Limit memory usage to 1 gigabyte
+        cpu: "1"          # Limit CPU usage to 1 CPU core
+
