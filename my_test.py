@@ -8,6 +8,6 @@ def client():
         yield client
 
 def test_index(client):
-    rv = client.get('/add_animal')
+    rv = client.get('/')
     assert rv.status_code == 200
 
