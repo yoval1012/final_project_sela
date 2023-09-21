@@ -32,7 +32,7 @@ pipeline {
                         customDockerImage.inside {
                             // Assuming your pytest command is something like this
                             sh "find . -name '__pycache__' -exec rm -r {} +"
-                            sh 'pytest -vv pytest.py' 
+                            sh 'pytest -vv my_test.py' 
                         }
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
