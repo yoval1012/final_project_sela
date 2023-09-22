@@ -28,7 +28,7 @@ pipeline {
             steps {
                 script {
                     echo "Running tests..."
-                    sh 'docker run yoval1012/finalproject:latest pytest my_test.py::test_index'
+                    sh 'docker run yoval1012/finalproject:latest pytest my_test.py'
                     echo "Tests completed successfully!"
                 }
             }
