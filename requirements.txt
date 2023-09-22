@@ -4,4 +4,4 @@ Flask-CORS
 pytest
 requests
 pytest-flask
-pytest_timeout
+unittest
