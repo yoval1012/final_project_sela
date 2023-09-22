@@ -33,7 +33,7 @@ pipeline {
                             // Assuming your pytest command is something like this
                             sh "find . -name '__pycache__' -exec rm -r {} +"
                             timeout(time: 10, unit: 'SECONDS') {
-                               sh 'my_test.py' 
+                               sh 'python my_test.py' 
                             } 
                             echo 'passed test'
                         }
