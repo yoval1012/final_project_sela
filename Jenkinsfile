@@ -27,20 +27,9 @@ pipeline {
         stage('Run Pytest') {
             steps {
                 script {
-                    try {
-                        def customDockerImage = docker.image('yoval1012/finalproject')
-                        customDockerImage.inside {
-                            // Assuming your pytest command is something like this
-                            sh "find . -name '__pycache__' -exec rm -r {} +"
-                            timeout(time: 10, unit: 'SECONDS') {
-                               sh 'python my_test.py' 
-                            } 
-                            echo 'passed test'
-                        }
-                    } catch (Exception e) {
-                        currentBuild.result = 'FAILURE'
-                        error("Failed to run pytest: ${e.message}")
-                    }
+                    echo "Running tests..."
+                    sh 'docker run yoval1012/finalproject:latest pytest mt_test.py'
+                    echo "Tests completed successfully!"
                 }
             }
         }
