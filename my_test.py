@@ -1,17 +1,17 @@
-import pytest
+import unittest
+from flask import Flask
 from app import app
-@pytest.fixture
-def client():
-    app.config['TESTING'] = True
-    with app.test_client() as client:
-        yield client
 
-        
-def test_index(client):
-    # Test if the response for the main route is 200 (OK)
-    rv = client.get('/')
-    assert rv.status_code == 200
+class TestApp(unittest.TestCase):
 
+    def setUp(self):
+        self.app = app.test_client()
 
+    def test_index(self):
+        response = self.app.get('/')
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'Welcome to the Cat App', response.data)
 
+if __name__ == '__main__':
+    unittest.main()
 
