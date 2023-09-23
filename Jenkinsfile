@@ -48,10 +48,11 @@ pipeline {
         stage('Build and Push Helm Chart') {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'yuval_dockerhub') {
-                        sh 'helm package helm-chart'
-                        sh 'helm push helm-chart-0.1.0.tgz oci://registry-1.docker.io/yoval1012/finalproject' 
-                    }    
+                    sh 'helm package helm-chart'           
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                        sh "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD"
+                        sh 'helm push helm-chart-0.1.0.tgz oci://registry-1.docker.io/yoval1012/finalproject'
+                    }
                 }
             }
         }       
