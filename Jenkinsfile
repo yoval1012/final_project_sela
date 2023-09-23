@@ -44,6 +44,16 @@ pipeline {
                     }
                 }
             }
+        }
+        stage('Build and Push Helm Chart') {
+            steps {
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'yuval_dockerhub') {
+                        sh 'helm package helm-chart'
+                        sh 'helm push chart-0.1.0.tgz oci://registry-1.docker.io/yoval1012' 
+                    }    
+                }
+            }
         }       
     }
 }
