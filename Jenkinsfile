@@ -50,7 +50,7 @@ pipeline {
                 script {
                     docker.withRegistry('https://registry.hub.docker.com', 'yuval_dockerhub') {
                         sh 'helm package helm-chart'
-                        sh 'helm push helm-chart-0.1.0.tgz oci://registry-1.docker.io/yoval1012' 
+                        sh 'helm push helm-chart-0.1.0.tgz oci://registry-1.docker.io/yoval1012/finalproject' 
                     }    
                 }
             }
