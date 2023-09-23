@@ -49,7 +49,7 @@ pipeline {
             steps {
                 script {
                     sh 'helm package helm-chart'           
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                    withCredentials([usernamePassword(credentialsId: 'yuval_dockerhub', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
                         sh "docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_PASSWORD"
                         sh 'helm push helm-chart-0.1.0.tgz oci://registry-1.docker.io/yoval1012/finalproject'
                     }
