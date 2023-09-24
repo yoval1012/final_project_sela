@@ -4,4 +4,3 @@ Flask-CORS
 pytest
 requests
 pytest-flask
-
