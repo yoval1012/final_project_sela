@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from pymongo import MongoClient
+import pytest
 
 app = Flask(__name__)
 
@@ -44,5 +45,6 @@ def remove_animal():
     #return jsonify({'animals': animals_from_db})
     return render_template('index.html', animals=animals_from_db)
 
-app.run(host='0.0.0.0',port=3001)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=3001)
 
